@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from bangazonapi.views import check_user, register_user
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('checkuser', check_user),
+    path('registeruser', register_user)
 ]
