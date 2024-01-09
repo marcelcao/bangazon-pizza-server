@@ -1,0 +1,14 @@
+[
+  {
+      "model": "bangazonapi.order",
+      "pk": 1,
+      "fields": {
+          "admin_user": 1,
+          "order_name": "MC's Go-To Order",
+          "customer_phone": "615-555-6767",
+          "customer_email": "mc@nss.com",
+          "order_type": 2,
+          "is_closed": false
+      }
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+      "model": "bangazonapi.ordercategory",
+      "pk": 1,
+      "fields": {
+          "category": "Phone"
+      }
+  },
+  {
+      "model": "bangazonapi.ordercategory",
+      "pk": 2,
+      "fields": {
+          "category": "In-Person"
+      }
+  }
+]
