@@ -10,19 +10,19 @@ from bangazonapi.serializers import OrderSerializer
 class OrderView(ViewSet):
   """Order View"""
   
-def retrieve(self, request, pk):
-  """Handles GET request for single order"""
-  
-  try:
-    order = Order.objects.get(pk=pk)
-    serializer = OrderSerializer(order)
-    return Response(serializer.data)
-  except Order.DoesNotExist as ex:
-    return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+  def retrieve(self, request, pk):
+    """Handles GET request for single order"""
+    
+    try:
+      order = Order.objects.get(pk=pk)
+      serializer = OrderSerializer(order)
+      return Response(serializer.data)
+    except Order.DoesNotExist as ex:
+      return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
-def list(self, request):
-  """Handles GET request for all orders"""
-  
-  order = Order.objects.all()
-  serializer = OrderSerializer(order, many=True)
-  return Response(serializer.data)
+  def list(self, request):
+    """Handles GET request for all orders"""
+    
+    order = Order.objects.all()
+    serializer = OrderSerializer(order, many=True)
+    return Response(serializer.data)

@@ -32,8 +32,8 @@ router.register(r'ordercategories', OrderCategoryView, 'ordercategory')
 router.register(r'orderitems', OrderItemView, 'orderitem')
 
 urlpatterns = [
-    path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
     path('checkuser', check_user),
-    path('registeruser', register_user)
+    path('registeruser', register_user),
 ]
