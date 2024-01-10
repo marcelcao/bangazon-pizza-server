@@ -1,0 +1,82 @@
+[
+  {
+      "model": "bangazonapi.menuitem",
+      "pk": 1,
+      "fields": {
+          "item_name": "Supreme Pizza",
+          "item_price": 15.25
+      }
+  },
+  {
+      "model": "bangazonapi.menuitem",
+      "pk": 2,
+      "fields": {
+          "item_name": "Pepperoni Pizza",
+          "item_price": 12.25
+      }
+  },
+  {
+    "model": "bangazonapi.menuitem",
+    "pk": 3,
+    "fields": {
+        "item_name": "Cheese Pizza",
+        "item_price": 10.25
+    }
+  },
+  {
+      "model": "bangazonapi.menuitem",
+      "pk": 4,
+      "fields": {
+          "item_name": "Mozzarella Sticks",
+          "item_price": 3.50
+      }
+  },
+  {
+    "model": "bangazonapi.menuitem",
+    "pk": 5,
+    "fields": {
+        "item_name": "Hot Wangs",
+        "item_price": 7.50
+    }
+  },
+  {
+    "model": "bangazonapi.menuitem",
+    "pk": 6,
+    "fields": {
+        "item_name": "Cheezy Bread",
+        "item_price": 5.00
+    }
+  },
+  {
+    "model": "bangazonapi.menuitem",
+    "pk": 7,
+    "fields": {
+        "item_name": "Buffalo Wangs",
+        "item_price": 7.50
+    }
+  },
+  {
+    "model": "bangazonapi.menuitem",
+    "pk": 8,
+    "fields": {
+        "item_name": "Soda (2 Liter)",
+        "item_price": 2.00
+    }
+  },
+  {
+    "model": "bangazonapi.menuitem",
+    "pk": 9,
+    "fields": {
+        "item_name": "Jalapeno Poppers",
+        "item_price": 4.50
+    }
+  },
+  {
+    "model": "bangazonapi.menuitem",
+    "pk": 10,
+    "fields": {
+        "item_name": "Cheesecake",
+        "item_price": 5.00
+    }
+  }
+]
