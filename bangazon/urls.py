@@ -15,10 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include
+from rest_framework import routers
 from bangazonapi.views import check_user, register_user
+from bangazonapi.views import OrderView
+from bangazonapi.views import MenuItemView
+from bangazonapi.views import PaymentTypeView
+from bangazonapi.views import OrderCategoryView
+from bangazonapi.views import OrderItemView
 
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'orders', OrderView, 'order')
+router.register(r'menuitems', MenuItemView, 'menuitem')
+router.register(r'paymenttypes', PaymentTypeView, 'paymenttype')
+router.register(r'ordercategories', OrderCategoryView, 'ordercategory')
+router.register(r'orderitems', OrderItemView, 'orderitem')
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('checkuser', check_user),
     path('registeruser', register_user)

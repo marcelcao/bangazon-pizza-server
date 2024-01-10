@@ -5,5 +5,5 @@ class OrderCategorySerializer(serializers.ModelSerializer):
   """JSON serializer for all order categories"""
   class Meta:
     model = OrderCategory
-    fields = ('id', 'category',)
+    fields = ('id', 'category')
     depth = 0
