@@ -4,9 +4,9 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
-from bangazonapi.models import Order
-from bangazonapi.serializers import OrderSerializer
-
+from rest_framework.decorators import action
+from bangazonapi.models import Order, OrderItem
+from bangazonapi.serializers import OrderSerializer, OrderItemSerializer
 class OrderView(ViewSet):
   """Order View"""
   
@@ -25,4 +25,13 @@ class OrderView(ViewSet):
     
     order = Order.objects.all()
     serializer = OrderSerializer(order, many=True)
+    return Response(serializer.data)
+  
+  @action(methods=['get'], detail=True)
+  def items(self, request, pk):
+    """Method to get all the items associated to a single order"""
+    items = OrderItem.objects.all()
+    associated_order = items.filter(order_id=pk)
+    
+    serializer = OrderItemSerializer(associated_order, many=True)
     return Response(serializer.data)
