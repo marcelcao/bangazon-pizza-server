@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
-from bangazonapi.models import Order, OrderItem
+from bangazonapi.models import Order, OrderItem, AdminUser, MenuItem
 from bangazonapi.serializers import OrderSerializer, OrderItemSerializer
 class OrderView(ViewSet):
   """Order View"""
@@ -35,3 +35,35 @@ class OrderView(ViewSet):
     
     serializer = OrderItemSerializer(associated_order, many=True)
     return Response(serializer.data)
+  
+  @action(methods=['delete'], detail=True)
+  def remove(self, request, pk):
+    """Method to delete items associted to a single order"""
+    admin_user = AdminUser.objects.get(uid=request.META['HTTP_AUTHORIZATION'])
+    orders = Order.objects.all()
+    associated_user_order = orders.filter(admin_user=admin_user)
+    
+    item = MenuItem.objects.get(pk=pk)
+    
+    order_item = OrderItem.objects.get(
+      order = associated_user_order,
+      menu_item = item
+    )
+    order_item.delete()
+    return Response({'message': 'Item removed'}, status=status.HTTP_204_NO_CONTENT)
+  
+  @action(methods=['post'], detail=True)
+  def add(self, request, pk):
+    """Method to add items associted to a single order"""
+    admin_user = AdminUser.objects.get(uid=request.META['HTTP_AUTHORIZATION'])
+    orders = Order.objects.all()
+    associated_user_order = orders.filter(admin_user=admin_user)
+    
+    item = MenuItem.objects.get(pk=pk)
+    
+    order_item = OrderItem.objects.create(
+      order = associated_user_order,
+      menu_item = item
+    )
+    return Response({'message': 'Item removed'}, status=status.HTTP_204_NO_CONTENT)
+    
