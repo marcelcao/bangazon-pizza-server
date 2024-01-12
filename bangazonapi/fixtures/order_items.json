@@ -1,7 +1,7 @@
 [
   {
       "model": "bangazonapi.orderitem",
-      "pk": 1,
+      "pk": 4,
       "fields": {
           "order": 1,
           "menu_item": 2
@@ -9,7 +9,7 @@
   },
   {
       "model": "bangazonapi.orderitem",
-      "pk": 2,
+      "pk": 5,
       "fields": {
           "order": 1,
           "menu_item": 5
@@ -17,7 +17,7 @@
   },
   {
     "model": "bangazonapi.orderitem",
-    "pk": 3,
+    "pk": 6,
     "fields": {
         "order": 1,
         "menu_item": 10
