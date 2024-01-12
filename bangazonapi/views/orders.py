@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
-from bangazonapi.models import Order, OrderItem
+from bangazonapi.models import Order, OrderItem, AdminUser, MenuItem
 from bangazonapi.serializers import OrderSerializer, OrderItemSerializer
 class OrderView(ViewSet):
   """Order View"""
@@ -24,7 +24,10 @@ class OrderView(ViewSet):
     """Handles GET request for all orders"""
     
     order = Order.objects.all()
-    serializer = OrderSerializer(order, many=True)
+    admin_user = AdminUser.objects.get(uid=request.META['HTTP_AUTHORIZATION'])
+    associated_user = order.filter(admin_user=admin_user)
+  
+    serializer = OrderSerializer(associated_user, many=True)
     return Response(serializer.data)
   
   @action(methods=['get'], detail=True)

@@ -4,7 +4,7 @@ from .order_category import OrderCategory
 
 class Order(models.Model):
 
-    admin_user = models.ForeignKey(AdminUser, on_delete=models.CASCADE)
+    admin_user = models.ForeignKey(AdminUser, on_delete=models.CASCADE, related_name="orders")
     order_name = models.CharField(max_length=50)
     customer_phone = models.CharField(max_length=50)
     customer_email = models.CharField(max_length=50)
