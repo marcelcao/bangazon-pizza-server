@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
-from bangazonapi.models import Order, OrderItem, AdminUser, MenuItem
+from bangazonapi.models import Order, OrderItem, AdminUser
 from bangazonapi.serializers import OrderSerializer, OrderItemSerializer
 class OrderView(ViewSet):
   """Order View"""
@@ -30,6 +30,12 @@ class OrderView(ViewSet):
     serializer = OrderSerializer(associated_user, many=True)
     return Response(serializer.data)
   
+  def destroy(self, request, pk):
+    """Handles DELETE request for order"""
+    order = Order.objects.get(pk=pk)
+    order.delete()
+    return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
   @action(methods=['get'], detail=True)
   def items(self, request, pk):
     """Method to get all the items associated to a single order"""
