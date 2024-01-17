@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
-from bangazonapi.models import Order, OrderItem, AdminUser, OrderCategory
+from bangazonapi.models import Order, OrderItem, AdminUser, OrderCategory, OrderRevenue
 from bangazonapi.serializers import OrderSerializer, OrderItemSerializer
 class OrderView(ViewSet):
   """Order View"""
@@ -26,7 +26,6 @@ class OrderView(ViewSet):
     order = Order.objects.all()
     admin_user = AdminUser.objects.get(uid=request.META['HTTP_AUTHORIZATION'])
     associated_user = order.filter(admin_user=admin_user)
-  
     serializer = OrderSerializer(associated_user, many=True)
     return Response(serializer.data)
   
@@ -83,26 +82,4 @@ class OrderView(ViewSet):
     
     serializer = OrderItemSerializer(associated_order, many=True)
     return Response(serializer.data)
-  
-  @action(methods=['update'], detail=True)
-  def close(self, request, pk):
-    """Method to close out order"""
-    order = Order.objects.get(pk=pk)
-    order.order_name = request.data["orderName"]
-    order.customer_phone = request.data["customerPhone"]
-    order.customer_email = request.data["customerEmail"]
-    
-    admin_user = AdminUser.objects.get(uid=request.data["adminUser"])
-    order.admin_user = admin_user
-    
-    order_type = OrderCategory.objects.get(pk=request.data["orderType"])
-    order.order_type = order_type
-    
-    is_closed = True
-    order.is_closed = is_closed
-    
-    order.save()
-    serializer = OrderSerializer(order)
-    return Response (serializer.data, status=status.HTTP_200_OK)
-  
   

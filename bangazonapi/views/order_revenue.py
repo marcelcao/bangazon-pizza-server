@@ -1,11 +1,13 @@
 """View module for handling revenue requests"""
 
 from django.http import HttpResponseServerError
+from django.db.models import Sum
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
-from bangazonapi.models import OrderRevenue, Order, PaymentType
-from bangazonapi.serializers import OrderRevenueSerializer
+from rest_framework.decorators import action
+from bangazonapi.models import OrderRevenue, Order, PaymentType, AdminUser, OrderCategory
+from bangazonapi.serializers import OrderRevenueSerializer, OrderSerializer
 
 
 class RevenueView(ViewSet):
@@ -43,3 +45,24 @@ class RevenueView(ViewSet):
     order_revenue.save()
     serializer = OrderRevenueSerializer(order_revenue)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+  
+  @action(methods=['update'], detail=True)
+  def close(self, request, pk):
+    """Method to close out order"""
+    order = Order.objects.get(pk=pk)
+    order.order_name = request.data["orderName"]
+    order.customer_phone = request.data["customerPhone"]
+    order.customer_email = request.data["customerEmail"]
+    
+    admin_user = AdminUser.objects.get(uid=request.data["adminUser"])
+    order.admin_user = admin_user
+    
+    order_type = OrderCategory.objects.get(pk=request.data["orderType"])
+    order.order_type = order_type
+    
+    is_closed = True
+    order.is_closed = is_closed
+    
+    order.save()
+    serializer = OrderSerializer(order)
+    return Response (serializer.data, status=status.HTTP_200_OK)

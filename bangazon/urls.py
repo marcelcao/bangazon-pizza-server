@@ -23,6 +23,7 @@ from bangazonapi.views import MenuItemView
 from bangazonapi.views import PaymentTypeView
 from bangazonapi.views import OrderCategoryView
 from bangazonapi.views import OrderItemView
+from bangazonapi.views import RevenueView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'orders', OrderView, 'order')
@@ -30,6 +31,7 @@ router.register(r'menuitems', MenuItemView, 'menuitem')
 router.register(r'paymenttypes', PaymentTypeView, 'paymenttype')
 router.register(r'ordercategories', OrderCategoryView, 'ordercategory')
 router.register(r'orderitems', OrderItemView, 'orderitem')
+router.register(r'orderrevenues', RevenueView,'orderrevenue' )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
