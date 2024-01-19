@@ -5,5 +5,5 @@ class OrderRevenueSerializer(serializers.ModelSerializer):
   """JSON serializer for order revenue"""
   class Meta:
     model = OrderRevenue
-    fields = ('id', 'order', 'order_tip', 'payment_type', 'close_date', 'total_tips', 'payment')
+    fields = ('id', 'order', 'order_tip', 'payment_type', 'close_date', 'total_tips', 'payment', 'total_values', 'order_category')
     depth = 1
