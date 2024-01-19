@@ -18,3 +18,11 @@ class Order(models.Model):
         if order_items is not None:
             return sum([order_item.menu_item.item_price for order_item in order_items.all()])
         return 0
+
+    @property
+    def custom_total_values(self):
+        """Custom total values decorator"""
+        order_items = getattr(self, 'order_items', None)
+        if order_items is not None:
+            return sum([order_item.menu_item.item_price for order_item in order_items.all()])
+        return 0
